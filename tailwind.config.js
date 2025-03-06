@@ -7,11 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
         primary: '#9C312F',
-        secondary: '#FCF8F2',
+        secondary: '#F3ECE0',
       },
       fontSize: {
         base: '32px',
+        large: '96px',
       }
     },
   },

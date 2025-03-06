@@ -6,8 +6,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <h1>LoveMe Tarot</h1>
+      <div className='justify-center items-center bg-secondary'>
+        <h1 className='text-large text-primary'>Loveme Tarot</h1>
       </div>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
@@ -17,9 +17,6 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
