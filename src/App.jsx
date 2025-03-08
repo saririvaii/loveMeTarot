@@ -1,44 +1,24 @@
-import { useEffect, useState } from "react";
-import { client } from "../sanity/sanityClient";
+import { useState } from 'react';
+import TarotPage from './pages/TarotPage';
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [currentView, setCurrentView] = useState('landing');
 
-  useEffect(() => {
-    console.log("Fetching tarot messages...");
-    client
-      .fetch(`*[_type == "tarotMessage"]{title, message}`)
-      .then((data) => {
-        console.log("Received data:", data);
-        setMessages(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching data:", err);
-        setError(err.message);
-        setIsLoading(false);
-      });
-  }, []);
-  
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-secondary p-6">
-      <h1 className="text-2xl font-bold text-primary">Loveme Tarot 🔮</h1>
-
-      {error ? (
-        <p className="mt-4 text-red-600">Error: {error}</p>
-      ) : isLoading ? (
-        <p className="mt-4 text-gray-600">Loading tarot messages...</p>
-      ) : messages.length > 0 ? (
-        messages.map((message) => (
-          <div className="mt-6 p-4 border border-gray-300 rounded-lg shadow-md bg-white">
-            <h2 className="text-lg font-semibold">{message.title}</h2>
-            <p className="mt-2">{message.message}</p>
-          </div>
-        ))
+    <div className="w-full min-h-screen overflow-hidden">
+      {currentView === 'landing' ? (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-secondary py-6">
+          <h1 className="text-base text-tertiary font-zt-formom mr-4 leading-none">Excited for your</h1>
+          <h1 className="text-large text-tertiary font-sloop -mt-2 leading-none mb-8 text-center">Concealer?</h1>
+          <button 
+            onClick={() => setCurrentView('tarot')}
+            className="px-8 py-3 bg-primary text-white rounded-lg font-zt-formom hover:opacity-90 transition-opacity"
+          >
+            Begin Your Reading
+          </button>
+        </div>
       ) : (
-        <p className="mt-4 text-gray-600">No tarot messages found.</p>
+        <TarotPage />
       )}
     </div>
   );
